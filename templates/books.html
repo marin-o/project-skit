@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Book List{% endblock %}
+{% block style %}
+    <style>
+        .view-toggle {
+            margin: 10px 0;
+        }
+
+        .book-list, .book-cards {
+            display: none;
+        }
+
+        .book-list.active, .book-cards.active {
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="view-toggle">
+        <button id="list-view-btn" class="btn btn-primary">List View</button>
+        <button id="card-view-btn" class="btn btn-secondary">Card View</button>
+    </div>
+
+    <div id="book-cards" class="row book-cards">
+        <div class="row">
+            {% for book in books %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ book.cover.url }}" alt="Card image cap">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text">{{ book.description }}</p>
+                                <a class="btn btn-info" href="{% url 'edit_book' book_id=book.id %}">Edit</a>
+                                <a class="btn btn-danger" href="{% url 'delete_book' book_id=book.id %}">Delete</a>
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div id="book-list" class="book-list">
+        <ul class="list-group">
+            {% for book in books %}
+                <li class="list-group-item my-2 border-top">
+                    <h5>{{ book.title }}</h5>
+                    <p>{{ book.description }}</p>
+                    <a class="btn btn-info" href="{% url 'edit_book' book_id=book.id %}">Edit</a>
+                    <a class="btn btn-danger" href="{% url 'delete_book' book_id=book.id %}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const listViewBtn = document.getElementById('list-view-btn');
+            const cardViewBtn = document.getElementById('card-view-btn');
+            const bookList = document.getElementById('book-list');
+            const bookCards = document.getElementById('book-cards');
+
+            listViewBtn.addEventListener('click', function () {
+                bookList.classList.add('active');
+                bookCards.classList.remove('active');
+            });
+
+            cardViewBtn.addEventListener('click', function () {
+                bookCards.classList.add('active');
+                bookList.classList.remove('active');
+            });
+
+            // Default view
+            bookCards.classList.add('active');
+        });
+    </script>
+{% endblock %}
