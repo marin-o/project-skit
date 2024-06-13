@@ -33,5 +33,5 @@ jobs:
     - name: Postgres database setup
       run: |
         docker-compose -f docker-compose.yml up -d db
-        sleep 30 # wait for the database to start
+        sleep 10 # wait for the database to start
         docker-compose -f docker-compose.yml run kiiiapp python manage.py migrate
