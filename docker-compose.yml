@@ -17,7 +17,7 @@ services:
     image: postgres:16
     volumes:
       - ./data/db:/var/lib/postgresql/data
-    environment:
+    env_file:
       - .env.db
     container_name: kiii_db_container
 volumes:
