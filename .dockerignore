@@ -1,9 +1,8 @@
 .env*
 .idea/
 media/
-static/*
+static/admin/
 staticfiles/
-/static/
 data/
 
 
