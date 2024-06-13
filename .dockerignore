@@ -6,6 +6,7 @@ staticfiles/
 data/
 Dockerfile
 docker-compose.yml
+kube/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
