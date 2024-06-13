@@ -1,9 +1,8 @@
 
 .idea/
 media/
-static/*
+static/admin/
 staticfiles/
-/static/
 data/
 
 # Byte-compiled / optimized / DLL files
