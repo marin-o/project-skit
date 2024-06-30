@@ -1,1 +1,1 @@
-# Project for CI/CD course @FCSE
+# Project for SKIT course @FCSE
