@@ -1,5 +1,5 @@
 """
-URL configuration for kiii project.
+URL configuration for Bookstore project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.0/topics/http/urls/
@@ -18,15 +18,23 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from kiii import settings
-from BookstoreApp.views import books, edit_book, add_book, delete_book
+from Bookstore import settings
+from BookstoreApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', books, name='home'),
     path('index/', books, name='home'),
     path('books/', books, name='home'),
+    path('authors/', authors, name='authors'),
+    path('publishers/', publishers, name='publishers'),
     path('edit_book/<int:book_id>', edit_book, name='edit_book'),
     path('add_book/', add_book, name='add_book'),
     path('delete_book/<int:book_id>', delete_book, name='delete_book'),
+    path('add_author/', add_author, name='add_author'),
+    path('add_publisher/', add_publisher, name='add_publisher'),
+    path('edit_author/<int:author_id>', edit_author, name='edit_author'),
+    path('delete_author/<int:author_id>', delete_author, name='delete_author'),
+    path('edit_publisher/<int:publisher_id>', edit_publisher, name='edit_publisher'),
+    path('delete_publisher/<int:publisher_id>', delete_publisher, name='delete_publisher'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

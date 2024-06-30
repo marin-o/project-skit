@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Delete Publisher</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ publisher_name }}"?</p>
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'publishers' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

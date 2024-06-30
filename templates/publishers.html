@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Publishers</h2>
+    <ul>
+        {% for publisher in publishers %}
+            <li>
+                {{ publisher.name }}
+                <a href="{% url 'edit_publisher' publisher_id=publisher.id %}" class="btn btn-info">Edit</a>
+                <a href="{% url 'delete_publisher' publisher_id=publisher.id %}" class="btn btn-danger">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
