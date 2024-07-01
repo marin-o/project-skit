@@ -15,8 +15,8 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
-    isbn10 = models.CharField(max_length=10)
-    isbn13 = models.CharField(max_length=13)
+    isbn10 = models.CharField(max_length=13)
+    isbn13 = models.CharField(max_length=17)
     pages = models.IntegerField()
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
