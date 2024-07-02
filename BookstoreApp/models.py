@@ -50,7 +50,7 @@ class BookAuthor(models.Model):
             raise Exception("Author is required")
         if not self.book:
             raise Exception("Book is required")
-        super(Author, self).save(*args, **kwargs)
+        super(BookAuthor, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.author.name + " - " + self.book.title
@@ -77,7 +77,7 @@ class BookPublisher(models.Model):
             raise Exception("Publisher is required")
         if not self.book:
             raise Exception("Book is required")
-        super(Author, self).save(*args, **kwargs)
+        super(BookPublisher, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.publisher.name + " - " + self.book.title

@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from django.forms import ModelMultipleChoiceField
+from django.forms import ModelMultipleChoiceField, ImageField
+
 
 from BookstoreApp.models import Book, Author, Publisher
 
@@ -7,6 +8,7 @@ from BookstoreApp.models import Book, Author, Publisher
 class BookForm(ModelForm):
     authors = ModelMultipleChoiceField(queryset=Author.objects.all())
     publishers = ModelMultipleChoiceField(queryset=Publisher.objects.all())
+    cover = ImageField(required=False)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

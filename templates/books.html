@@ -28,13 +28,20 @@
             {% for book in books %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        <img class="card-img-top" src="{{ MEDIA_URL }}{{ book.cover.url }}" alt="Card image cap">
+                        <img class="card-img-top"
+                                {% if book.cover %}
+                             src="{{ MEDIA_URL }}{{ book.cover.url }}"
+                                {% else %}
+                             src="https://placehold.co/600x400?text=Book+has+no+Cover"
+                                {% endif %}
+                             alt="Card image cap">
+
 
                         <div class="card-body">
                             <h5 class="card-title">{{ book.title }}</h5>
                             <p class="card-text">{{ book.description }}</p>
-                                <a class="btn btn-info" href="{% url 'edit_book' book_id=book.id %}">Edit</a>
-                                <a class="btn btn-danger" href="{% url 'delete_book' book_id=book.id %}">Delete</a>
+                            <a class="btn btn-info" href="{% url 'edit_book' book_id=book.id %}">Edit</a>
+                            <a class="btn btn-danger" href="{% url 'delete_book' book_id=book.id %}">Delete</a>
                         </div>
 
                     </div>
