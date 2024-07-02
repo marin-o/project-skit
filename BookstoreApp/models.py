@@ -22,6 +22,16 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     cover = models.ImageField(upload_to='book_covers/', null=True)
 
+    def save(self, *args, **kwargs):
+        required_fields = ['title', 'isbn10', 'isbn13', 'pages', 'description', 'price']
+
+        for field_name in required_fields:
+            value = getattr(self, field_name)
+            if not value:
+                raise Exception(f"{field_name.capitalize()} is required")
+
+        super(Book, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 
