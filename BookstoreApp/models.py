@@ -45,12 +45,24 @@ class BookAuthor(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
 
+    def save(self, *args, **kwargs):
+        if not self.author:
+            raise Exception("Author is required")
+        if not self.book:
+            raise Exception("Book is required")
+        super(Author, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.author.name + " - " + self.book.title
 
 
 class Publisher(models.Model):
     name = models.CharField(max_length=100)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            raise Exception("Name is required")
+        super(Publisher, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -59,6 +71,13 @@ class Publisher(models.Model):
 class BookPublisher(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
+
+    def save(self, *args, **kwargs):
+        if not self.publisher:
+            raise Exception("Publisher is required")
+        if not self.book:
+            raise Exception("Book is required")
+        super(Author, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.publisher.name + " - " + self.book.title

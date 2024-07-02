@@ -12,4 +12,4 @@ def test_create_author(author_factory):
 @pytest.mark.django_db
 def test_author_name_validation(author_factory):
     with pytest.raises(Exception):
-        author_factory(name="")
+        author_factory(name='')
