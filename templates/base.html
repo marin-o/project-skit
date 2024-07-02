@@ -31,16 +31,19 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'publishers' %}">Publishers</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_book' %}">Add Book</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_author' %}">Add Author</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'add_publisher' %}">Add Publisher</a>
-            </li>
+            </li>{% if request.resolver_match.url_name == 'home' %}
+                <li class="nav-item">
+                    <a class="btn btn-dark" href="{% url 'add_book' %}">Add Book</a>
+                </li>
+            {% elif request.resolver_match.url_name == 'authors' %}
+                <li class="nav-item">
+                    <a class="btn btn-dark" href="{% url 'add_author' %}">Add Author</a>
+                </li>
+            {% elif request.resolver_match.url_name == 'publishers' %}
+                <li class="nav-item">
+                    <a class="btn btn-dark" href="{% url 'add_publisher' %}">Add Publisher</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

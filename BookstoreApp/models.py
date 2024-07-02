@@ -9,6 +9,11 @@ from django.dispatch import receiver
 class Author(models.Model):
     name = models.CharField(max_length=100)
 
+    def save(self, *args, **kwargs):
+        if not self.name:
+            raise Exception("Name is required")
+        super(Author, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
