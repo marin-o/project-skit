@@ -4,10 +4,10 @@ from BookstoreApp.models import Book, Author, Publisher
 
 
 @pytest.mark.django_db
-def test_valid_book_form(book_factory, author_factory, publisher_factory):
-    author_factory()
-    publisher_factory()
-    book = book_factory(cover='')
+def test_valid_book_form(create_book, create_author, create_publisher):
+    create_author()
+    create_publisher()
+    book = create_book(cover='')
     data = {
         'title': book.title,
         'isbn10': book.isbn10,
@@ -30,8 +30,8 @@ def test_invalid_book_form():
 
 
 @pytest.mark.django_db
-def test_valid_author_form(author_factory):
-    author = author_factory()
+def test_valid_author_form(create_author):
+    author = create_author()
     data = {
         'name': author.name,
     }
@@ -46,8 +46,8 @@ def test_invalid_author_form():
 
 
 @pytest.mark.django_db
-def test_valid_publisher_form(publisher_factory):
-    publisher = publisher_factory()
+def test_valid_publisher_form(create_publisher):
+    publisher = create_publisher()
     data = {
         'name': publisher.name,
     }

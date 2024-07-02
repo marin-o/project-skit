@@ -3,13 +3,13 @@ from BookstoreApp.models import Author
 
 
 @pytest.mark.django_db
-def test_create_author(author_factory):
-    author = author_factory(name="Author1")
+def test_create_author(create_author):
+    author = create_author(name="Author1")
 
     assert Author.objects.filter(name="Author1").exists()
 
 
 @pytest.mark.django_db
-def test_author_name_validation(author_factory):
+def test_author_name_validation(create_author):
     with pytest.raises(Exception):
-        author_factory(name='')
+        create_author(name='')
