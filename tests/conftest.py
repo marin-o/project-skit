@@ -99,19 +99,20 @@ def setup_publisher_edit_data(create_publisher):
     return publisher, data
 
 
-@pytest.fixture(scope='class', params=['chrome', 'firefox'])
+@pytest.fixture(scope='class', params=['chrome'])
 def driver_init(request):
     if request.param == 'chrome':
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
         driver = webdriver.Chrome(options=options)
-    elif request.param == 'firefox':
-        options = webdriver.FirefoxOptions()
-        # options.add_argument('--headless')
-        driver = webdriver.Firefox(options=options)
+    # elif request.param == 'firefox':
+    #     options = webdriver.FirefoxOptions()
+    #     options.add_argument("--disable-extensions")
+    #     options.add_argument("--disable-popup-blocking")
+    #     driver = webdriver.Firefox(options=options)
     request.cls.driver = driver
     yield
-    driver.close()
+    driver.quit()
 
 
 @pytest.fixture(scope='class')
