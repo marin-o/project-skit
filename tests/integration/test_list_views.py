@@ -9,12 +9,19 @@ from django.urls import reverse
     ("publishers", "create_publisher_batch", 5),
 ])
 def test_views(client, request, url_name, create_batch, expected_count):
+    """
+    Test list views
+    """
+
+    # Arrange
     create_batch = request.getfixturevalue(create_batch)
     items = create_batch(expected_count)
 
+    # Act
     url = reverse(url_name)
     response = client.get(url)
 
+    # Assert
     assert response.status_code == 200
 
     for item in items:

@@ -1,13 +1,21 @@
 import pytest
 from django.urls import reverse
-from BookstoreApp.models import Book, Author, Publisher
 
 
 @pytest.mark.django_db
 @pytest.mark.parametrize('setup_delete_data', ['book', 'author', 'publisher'], indirect=True)
 def test_delete_instance(client, setup_delete_data):
+    """
+    Test delete views
+    """
+
+    # Arrange
     instance, url_name, redirect_url = setup_delete_data
+
+    # Act
     url = reverse(url_name, args=[instance.pk])
+
+    # Assert
     response = client.get(url)
     assert response.status_code == 200
     if hasattr(instance, "name"):
