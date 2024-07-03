@@ -1,6 +1,5 @@
 import pytest
-from selenium import webdriver
-from selenium.webdriver import ActionChains, Keys
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -65,7 +64,6 @@ class TestChromeAndFirefox:
         author_name = create_author().name
         publisher_name = create_publisher().name
 
-
         self.driver.get(f'{live_server.url}/books/')
         addlink = self.driver.find_element(By.PARTIAL_LINK_TEXT, 'Add')
         addlink.click()
@@ -92,7 +90,6 @@ class TestChromeAndFirefox:
         price_input = self.driver.find_element(By.ID, 'id_price')
         price_input.send_keys("29.99")
 
-        # Select authors and publishers using dropdowns (example)
         authors_select = self.driver.find_element(By.ID, 'id_authors')
         for option in authors_select.find_elements(By.TAG_NAME, 'option'):
             if option.text == author_name:
@@ -109,13 +106,11 @@ class TestChromeAndFirefox:
                 ActionChains(self.driver).move_to_element(option).click().perform()
                 break
 
-        # Submit the form
         submit = self.driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
         wait = WebDriverWait(self.driver, 10)
         wait.until(EC.element_to_be_clickable(submit))
         time.sleep(1)
         ActionChains(self.driver).move_to_element(submit).click().perform()
 
-        # Assert that the book was added successfully
         assert 'Books' in self.driver.title
         assert 'Test Book Title' in self.driver.page_source
