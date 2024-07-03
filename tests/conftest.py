@@ -2,7 +2,7 @@ import pytest
 from django.urls import reverse
 from selenium import webdriver
 
-from BookstoreApp.models import Author, Publisher, Book
+from BookstoreApp.models import Author, Publisher
 from tests.factories import AuthorFactory, PublisherFactory, BookFactory
 
 

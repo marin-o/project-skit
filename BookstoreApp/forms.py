@@ -1,7 +1,6 @@
 from django.forms import ModelForm
 from django.forms import ModelMultipleChoiceField, ImageField
 
-
 from BookstoreApp.models import Book, Author, Publisher
 
 

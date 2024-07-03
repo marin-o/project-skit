@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from BookstoreApp.models import *
 
+
 # Register your models here.
 
 

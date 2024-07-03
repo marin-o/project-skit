@@ -1,6 +1,7 @@
 import pytest
+
 from BookstoreApp.forms import BookForm, AuthorForm, PublisherForm
-from BookstoreApp.models import Book, Author, Publisher
+from BookstoreApp.models import Author, Publisher
 
 
 @pytest.mark.django_db
