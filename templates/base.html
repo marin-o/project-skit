@@ -12,16 +12,17 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
             crossorigin="anonymous"></script>
     {% block style %}
+    <style>
+        .navbar-nav .nav-link {
+            padding-right: 10px; /* Optional: Adjust padding between nav items */
+        }
+    </style>
     {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'home' %}">Bookstore Inventory</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'home' %}">Books</a>
@@ -31,7 +32,8 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'publishers' %}">Publishers</a>
-            </li>{% if request.resolver_match.url_name == 'home' %}
+            </li>
+            {% if request.resolver_match.url_name == 'home' %}
                 <li class="nav-item">
                     <a class="btn btn-dark" href="{% url 'add_book' %}">Add Book</a>
                 </li>
@@ -51,7 +53,5 @@
     {% block content %}
     {% endblock %}
 </div>
-
-
 </body>
 </html>

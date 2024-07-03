@@ -1,7 +1,8 @@
 import pytest
 from django.urls import reverse
+from selenium import webdriver
 
-from BookstoreApp.models import Author, Publisher
+from BookstoreApp.models import Author, Publisher, Book
 from tests.factories import AuthorFactory, PublisherFactory, BookFactory
 
 
@@ -96,3 +97,37 @@ def setup_publisher_edit_data(create_publisher):
     publisher = create_publisher()
     data = {'name': 'New Name'}
     return publisher, data
+
+
+@pytest.fixture(scope='class', params=['chrome', 'firefox'])
+def driver_init(request):
+    if request.param == 'chrome':
+        options = webdriver.ChromeOptions()
+        # options.add_argument('--headless')
+        driver = webdriver.Chrome(options=options)
+    elif request.param == 'firefox':
+        options = webdriver.FirefoxOptions()
+        # options.add_argument('--headless')
+        driver = webdriver.Firefox(options=options)
+    request.cls.driver = driver
+    yield
+    driver.close()
+
+
+@pytest.fixture(scope='class')
+def create_book_batch_class():
+    def _book_batch(batch_size=5, **kwargs):
+        return BookFactory.create_batch(batch_size, **kwargs)
+    return _book_batch
+
+
+@pytest.fixture(scope='class')
+def create_book_batch_e2e():
+    books = BookFactory.create_batch(5)
+    for book in books:
+        book.title = f"Book {book.pk}"
+        book.save()
+    yield
+    for book in books:
+        if Book.objects.filter(pk=book.pk).exists():
+            book.delete()

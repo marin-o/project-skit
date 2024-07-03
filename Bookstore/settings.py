@@ -112,6 +112,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',  # Directory for static files during development
 ]
 
+
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
