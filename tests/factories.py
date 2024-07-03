@@ -30,7 +30,7 @@ class BookFactory(factory.django.DjangoModelFactory):
     pages = fake.random_int()
     description = fake.text(100)
     price = fake.random_int()
-    cover = fake.image_url()
+    cover = ''
 
     @factory.post_generation
     def authors_and_publishers(self, create, extracted, **kwargs):
